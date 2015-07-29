@@ -1,14 +1,11 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    faker (1.4.3)
-      i18n (~> 0.5)
-    i18n (0.7.0)
     minitest (5.6.1)
+    pg (0.18.1)
     rack (1.6.1)
     rack-protection (1.5.3)
       rack
-    redis (3.2.1)
     sinatra (1.4.6)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -19,7 +16,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  faker
   minitest
-  redis
+  pg
   sinatra
