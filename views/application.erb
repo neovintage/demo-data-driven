@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></link>
+    <link rel="stylesheet" type="text/css" href="http://keen.github.io/dashboards/assets/css/keen-dashboards.css"></link>
+    <title>Mock Invoicing</title>
+    <style>
+      body {
+        padding-top: 50px;
+      }
+      .chart-wrapper .chart-stage {
+        min-height: 240px;
+        overflow: hidden;
+        padding: 5px 10px;
+        position: relative;
+      }
+      .single-metric {
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body class="application">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Mock Invoices</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li <%= page == 'dashboard' ? 'class="active"' : '' %>><a href="/">Dashboard</a></li>
+          <li <%= page == 'customers' ? 'class="active"' : '' %>><a href="/customers">Customers</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <% if badconnection %>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <%= connection_err %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <%= yield %>
+  </div>
+  </body>
+</html>

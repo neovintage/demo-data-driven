@@ -1,0 +1,79 @@
+<div class="row">
+
+  <div class="col-sm-8">
+    <div class="chart-wrapper">
+      <div class="chart-title">
+        Daily Sum of Orders (millions)
+      </div>
+      <div class="chart-stage">
+        <div id="chart-01"></div>
+      </div>
+      <div class="chart-notes">
+        This is the total dollar amount of orders by day
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+    <div class="chart-stage single-metric">
+      <div id="chart-02"></div>
+    </div>
+    <div class="chart-stage single-metric">
+      <div id="chart-03"></div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script type="text/javascript" src="http://keen.github.io/dashboards/assets/lib/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://keen.github.io/dashboards/assets/lib/holderjs/holder.js"></script>
+<script>
+Holder.add_theme("white", { background:"#fff", foreground:"#a7a7a7", size:10 });
+</script>
+<script type="text/javascript" src="http://keen.github.io/dashboards/assets/lib/keen-js/dist/keen.min.js"></script>
+<script>
+var client = new Keen({});
+Keen.ready(function() {
+  var chart1 = new Keen.Dataviz()
+    .el(document.getElementById("chart-01"))
+    .chartType("areachart")
+    .parseRawData({
+      result: <%= @orders.to_json %>
+    })
+    .title(false)
+    .height(250)
+    .chartOptions({
+      chartArea: {
+        height: "85%",
+        left: "5%",
+        top: "5%",
+        width: "90%"
+      },
+      legend: {
+        position: 'none'
+      }
+    })
+    .width("auto")
+    .render();
+
+  var chart2 = new Keen.Dataviz()
+    .el(document.getElementById("chart-02"))
+    .chartType("metric")
+    .colors(["#ED5565"])
+    .title("Failed Orders")
+    .parseRawData({ result: <%= @failedorders %> })
+    .width(400)
+    .render();
+
+  var chart3 = new Keen.Dataviz()
+    .el(document.getElementById("chart-03"))
+    .chartType("metric")
+    .colors(["#37BC9B"])
+    .title("Shipped Orders")
+    .parseRawData({ result: <%= @openorders %> })
+    .width(400)
+    .render();
+});
+</script>
