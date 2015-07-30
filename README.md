@@ -36,8 +36,9 @@ correctly it will let you know. :-)
   $ heroku addons:create heroku-postgresql:standard-4 --private=true
   ```
 
-* Try to PSQL not `heroku pg:psql` with the connection string from config var.
-  This is just for illustrative purposes if you're demoing the process.
+* For illustrative purposes, Try to psql using the credentials from `heroku pg:credentials`. What we're illustrating is that psql cant connect to the database because it needs to connect through a bastion to actually get to the database. 
+  `heroku pg:psql` on the other hand understands the bastions and then connect
+  to the database.
   ```
   $ env PGCONNECT_TIMEOUT=1 psql connection-string-goes-here
   ```
