@@ -7,8 +7,17 @@ correctly it will let you know. :-)
 ## Setup
 
 * Clone this repo
+
 * Create a space in an org
+  ```
+  $ heroku spaces:create my-space-name --org whatever
+  ```
+
 * Create an app in an org
+  ```
+  $ heroku create space-app --space my-space-name
+  ```
+
 * have your clone point to the new app you've just created
 * Deploy application
 * Navigate to the dashboard. Show that theres no database

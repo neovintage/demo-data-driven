@@ -2,17 +2,24 @@ require 'sinatra'
 require 'pg'
 require 'json'
 
+if ENV['RACK_ENV'] == 'production'
+  db_connection_details = ENV['DATABASE_URL']
+else
+  db_connection_details = { dbname: 'tpch' }
+end
+
 badconnection = false
 begin
-  conn = PG.connect( dbname: 'tpch' )
+  conn = PG.connect( db_connection_details )
 rescue => e
   badconnection = true
   connection_err = e.message
 end
 
 get '/' do
-  @openorders = 0
-  @orders     = []
+  @openorders   = 0
+  @failedorders = 0
+  @orders       = []
 
   if !badconnection
     @openorders = conn.exec("select count(*) as order_count from orders where o_orderstatus = 'O' and o_orderdate = '1998-08-02'")
