@@ -1,16 +1,18 @@
 require 'sinatra'
 require 'pg'
+require 'tilt/erubis'
 require 'json'
+require './conn_string'
 
 if ENV['RACK_ENV'] == 'production'
   db_connection_details = ENV['DATABASE_URL']
 else
-  db_connection_details = { dbname: 'tpch' }
+  db_connection_details = "postgres://localhost/tpch"
 end
 
 badconnection = false
 begin
-  conn = PG.connect( db_connection_details )
+  conn = PG.connect( postgres_url_deconstruct(db_connection_details) )
 rescue => e
   badconnection = true
   connection_err = e.message
