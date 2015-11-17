@@ -6,6 +6,7 @@ gem 'sinatra'
 gem 'pg'
 gem 'tilt'
 gem 'erubis'
+gem 'redis'
 
 group :development do
   gem 'minitest'
