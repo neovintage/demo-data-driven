@@ -8,20 +8,7 @@ correctly it will let you know. :-)
 
 * Clone this repo
 
-* Create a space in an org
-  ```
-  $ heroku spaces:create my-space-name --org whatever
-  ```
-
-* Create an app in an org
-  ```
-  $ heroku create space-app --space my-space-name
-  ```
-
-* have your clone point to the new app you've just created
-  ```
-  $ heroku git:remote
-  ```
+* Create an app on heroku
 
 * Deploy application
   ```
@@ -33,21 +20,10 @@ correctly it will let you know. :-)
 
 * Create a database
   ```
-  $ heroku addons:create heroku-postgresql:standard-4 --private=true
+  $ heroku addons:create heroku-postgresql:standard-0
   ```
 
-* For illustrative purposes, Try to psql using the credentials from `heroku pg:credentials`. What we're illustrating is that psql cant connect to the database because it needs to connect through a bastion to actually get to the database. 
-  `heroku pg:psql` on the other hand understands the bastions and then connect
-  to the database.
-  ```
-  $ env PGCONNECT_TIMEOUT=1 psql connection-string-goes-here
-  ```
-
-* Load [tpch
-  dataset](https://s3-us-west-2.amazonaws.com/rimas-pgbackups-testing/tpch_logical.dump). Make sure you download the dataset to your machine before running this command. It's not very fast otherwise. I've included `pv` so you can see progres bar.
-  ```
-  $ pv tpch_logical.dump | heroku pg:psql
-  ```
+* Load tpch dataset
 
 * Reload the app
 * Profit!
